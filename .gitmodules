@@ -1,0 +1,3 @@
+[submodule "ToyIDL"]
+	path = ToyIDL
+	url = https://github.com/axnsan12/toyidl.git
