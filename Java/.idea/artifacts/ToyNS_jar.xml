@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="ToyNS:jar">
+    <output-path>$PROJECT_DIR$/artifacts/ToyNS_jar</output-path>
+    <root id="archive" name="ToyNS.jar">
+      <element id="module-output" name="ToyORB" />
+    </root>
+  </artifact>
+</component>

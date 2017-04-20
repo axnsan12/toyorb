@@ -1,6 +1,9 @@
 package servers;
 
+import ToyORB.ToyNS;
 import common.InfoService;
+
+import java.io.IOException;
 
 public class InfoServiceImpl implements InfoService {
 	@Override
@@ -20,5 +23,15 @@ public class InfoServiceImpl implements InfoService {
 	@Override
 	public String getServiceType() {
 		return "InfoService";
+	}
+
+	public static void main(String[] args) {
+		InfoService infoService = new InfoServiceImpl();
+
+		try {
+			ToyNS.registerAndStart("ROINFO", infoService);
+		} catch (IOException e) {
+			throw new RuntimeException("exception while running service: " + e.getMessage(), e);
+		}
 	}
 }
