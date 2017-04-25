@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace ToyORB.Messages
@@ -98,6 +99,12 @@ namespace ToyORB.Messages
             short length = stream.ReadInt16BigEndian();
             var bytes = stream.ReadFully(length);
             return Encoding.UTF8.GetString(bytes);
+        }
+
+        public static string RandomString(this Random random, int length)
+        {
+            const string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, length).Select(s => s[random.Next(s.Length)]).ToArray());
         }
     }
 }
