@@ -2,8 +2,9 @@ package common;
 
 import ToyORB.ToyORBService;
 
+@SuppressWarnings({"MethodParameterNamingConvention", "InstanceMethodNamingConvention", "InterfaceNamingConvention"})
 public interface InfoService extends ToyORBService
 {
-	String getRoadInfo(int roadId);
-	float getTemperature(String city);
+    int getTemperature(String city);
+    String getRoadInfo(int roadId);
 }
