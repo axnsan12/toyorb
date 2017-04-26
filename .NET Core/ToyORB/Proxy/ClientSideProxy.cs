@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using ToyORB.Messages;
 using ToyORB.Network;
 using System.Reflection.Emit;
@@ -30,9 +31,14 @@ namespace ToyORB.Proxy
             }
         }
 
-        public object MethodCall(object proxy, MethodInfo method, object[] args)
+        public object Invoke(object proxy, MethodInfo method, object[] args)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Made it into Invoke!");
+            var remoteArgs = Enumerable.Zip(method.GetParameters(), args, (pt, pv) => Tuple.Create(pt.Name, pv)).ToList();
+            MethodCallMessage call = new MethodCallMessage(method.Name, remoteArgs);
+            MethodReturnMessage result = RemoteCall(call);
+
+            return result.Value;
         }
     }
 }

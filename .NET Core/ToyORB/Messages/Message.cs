@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 namespace ToyORB.Messages
 {
@@ -39,8 +40,7 @@ namespace ToyORB.Messages
         public static Message ReadFrom(BinaryReader stream)
         {
             var type = (MessageType) stream.ReadByte();
-            dynamic reader = MessageReaders[type];
-            if (reader == null)
+            if (!MessageReaders.TryGetValue(type, out dynamic reader))
             {
                 throw new InvalidOperationException("No reader registered for type " + type + ". Forget to add MessageReader mapping?");
             }

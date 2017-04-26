@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading;
 
 namespace ToyORB.Messages
 {
@@ -23,7 +20,7 @@ namespace ToyORB.Messages
                     throw new RemoteCallException(_errorMessage);
                 }
 
-                return _returnValue.Value;
+                return Convert.ChangeType(_returnValue.Value, _returnValue.DotnetType);
             }
         }
 

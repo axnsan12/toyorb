@@ -54,9 +54,12 @@ namespace ToyORB
             serviceProxy.Start();
         }
 
-        public static T GetServiceReference<T>(string serviceName) where T : IToyOrbService
+        public static T GetServiceReference<T>(string serviceName, string nsHost = DefaultHostname, int nsPort = DefaultPort) where T : IToyOrbService
         {
-            return default(T);
+            var lookupRequest = new NameLookupMessage(serviceName);
+            var lookupResponse = new Requestor<NameLookupMessage, NameResponseMessage>(nsHost, nsPort).MakeRequest(lookupRequest);
+            var remoteProxy = new ClientSideProxy(lookupResponse.TypeName, lookupResponse.Host, lookupResponse.Port);
+            return DynamicProxy.NewProxyInstance<T>(remoteProxy);
         }
     }
 }

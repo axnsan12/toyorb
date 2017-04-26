@@ -12,6 +12,7 @@ namespace ToyORB.Network
 
         public Requestor(string host, int port)
         {
+            Message.InitReaders();
             _host = host ?? throw new ArgumentNullException(nameof(host));
             _port = port;
         }

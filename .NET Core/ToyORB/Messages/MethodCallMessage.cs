@@ -12,7 +12,13 @@ namespace ToyORB.Messages
         public string MethodName { get; }
         public IReadOnlyList<Tuple<string, DataValue>> Arguments { get; }
 
-        public MethodCallMessage(string methodName, IList<Tuple<string, DataValue>> arguments) : base(MESSAGE_TYPE)
+        public MethodCallMessage(string methodName, IList<Tuple<string, object>> arguments) : base(MESSAGE_TYPE)
+        {
+            MethodName = methodName ?? throw new ArgumentNullException(nameof(methodName));
+            Arguments = arguments.Select(nv => Tuple.Create(nv.Item1, DataValue.FromObject(nv.Item2))).ToList();
+        }
+
+        private MethodCallMessage(string methodName, IList<Tuple<string, DataValue>> arguments) : base(MESSAGE_TYPE)
         {
             MethodName = methodName ?? throw new ArgumentNullException(nameof(methodName));
             Arguments = new List<Tuple<string, DataValue>>(arguments).AsReadOnly();
