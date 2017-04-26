@@ -36,4 +36,3 @@ public class Requestor<REQ extends Message, RES extends Message> {
 		return response;
 	}
 }
-

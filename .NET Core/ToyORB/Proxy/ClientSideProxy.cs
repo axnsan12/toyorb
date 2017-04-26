@@ -33,10 +33,9 @@ namespace ToyORB.Proxy
 
         public object Invoke(object proxy, MethodInfo method, object[] args)
         {
-            Console.WriteLine("Made it into Invoke!");
-            var remoteArgs = Enumerable.Zip(method.GetParameters(), args, (pt, pv) => Tuple.Create(pt.Name, pv)).ToList();
-            MethodCallMessage call = new MethodCallMessage(method.Name, remoteArgs);
-            MethodReturnMessage result = RemoteCall(call);
+            var remoteArgs = method.GetParameters().Zip(args, (pt, pv) => Tuple.Create(pt.Name, pv)).ToList();
+            var call = new MethodCallMessage(method.Name, remoteArgs);
+            var result = RemoteCall(call);
 
             return result.Value;
         }

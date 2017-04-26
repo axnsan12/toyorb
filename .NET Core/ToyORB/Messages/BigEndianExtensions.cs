@@ -57,41 +57,41 @@ namespace ToyORB.Messages
             {
                 int read = stream.Read(buffer, offset, buffer.Length - offset);
                 if (read == 0)
-                    throw new System.IO.EndOfStreamException();
+                    throw new EndOfStreamException();
                 offset += read;
             }
             System.Diagnostics.Debug.Assert(offset == buffer.Length);
             return buffer;
         }
 
-        private static readonly byte[] _shortBuffer = new byte[2], _intBuffer = new byte[4], _floatBuffer = new byte[4];
+        private static readonly byte[] ShortBuffer = new byte[2], IntBuffer = new byte[4], FloatBuffer = new byte[4];
 
         public static short ReadInt16BigEndian(this BinaryReader stream)
         {
-            stream.ReadFully(_shortBuffer);
+            stream.ReadFully(ShortBuffer);
             if (BitConverter.IsLittleEndian)
             {
-                Array.Reverse(_shortBuffer);
+                Array.Reverse(ShortBuffer);
             }
-            return BitConverter.ToInt16(_shortBuffer, 0);
+            return BitConverter.ToInt16(ShortBuffer, 0);
         }
         public static int ReadInt32BigEndian(this BinaryReader stream)
         {
-            stream.ReadFully(_intBuffer);
+            stream.ReadFully(IntBuffer);
             if (BitConverter.IsLittleEndian)
             {
-                Array.Reverse(_intBuffer);
+                Array.Reverse(IntBuffer);
             }
-            return BitConverter.ToInt32(_intBuffer, 0);
+            return BitConverter.ToInt32(IntBuffer, 0);
         }
         public static float ReadSingleBigEndian(this BinaryReader stream)
         {
-            stream.ReadFully(_floatBuffer);
+            stream.ReadFully(FloatBuffer);
             if (BitConverter.IsLittleEndian)
             {
-                Array.Reverse(_floatBuffer);
+                Array.Reverse(FloatBuffer);
             }
-            return BitConverter.ToSingle(_floatBuffer, 0);
+            return BitConverter.ToSingle(FloatBuffer, 0);
         }
 
         public static string ReadStringBigEndian(this BinaryReader stream)
