@@ -9,6 +9,8 @@ public class IdlTestClient {
 	public static void main(String[] args) {
 		try {
 			IdlTestService testService = ToyNS.getServiceReference("IDL", IdlTestService.class);
+			System.out.println("Service type is: " + testService.getServiceType());
+
 			System.out.println("Service implementation: " + testService.getImplementationName());
 			System.out.println("Counter initial value: " + testService.getCounter());
 			testService.updateCounter(69);

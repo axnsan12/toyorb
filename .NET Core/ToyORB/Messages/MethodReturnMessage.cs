@@ -31,7 +31,7 @@ namespace ToyORB.Messages
             _returnValue = returnValue;
         }
 
-        public MethodReturnMessage(string errorMessage) : this(errorMessage, false, null)
+        public MethodReturnMessage(string errorMessage) : this(errorMessage, isVoid: false, returnValue: null)
         {
             if (string.IsNullOrEmpty(errorMessage))
                 throw new ArgumentException(nameof(errorMessage));

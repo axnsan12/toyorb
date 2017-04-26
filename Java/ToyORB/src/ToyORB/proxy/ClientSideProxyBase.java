@@ -31,6 +31,7 @@ public class ClientSideProxyBase implements InvocationHandler {
 
 	@Override
 	public Object invoke(Object proxy, Method method, Object[] args) {
+		if (args == null) args = new Object[0];
 		if (method.getName().equals("getServiceType") && args.length == 0 && method.getReturnType().equals(String.class)) {
 			return serviceType;
 		}

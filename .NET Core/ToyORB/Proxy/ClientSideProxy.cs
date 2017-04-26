@@ -33,6 +33,12 @@ namespace ToyORB.Proxy
 
         public object Invoke(object proxy, MethodInfo method, object[] args)
         {
+            if (args == null) args = new object[0];
+
+            if (method.Name == "get_ServiceType" && args.Length == 0 && method.ReturnType == typeof(string)) {
+                return ServiceType;
+            }
+
             var remoteArgs = method.GetParameters().Zip(args, (pt, pv) => Tuple.Create(pt.Name, pv)).ToList();
             var call = new MethodCallMessage(method.Name, remoteArgs);
             var result = RemoteCall(call);

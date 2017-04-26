@@ -115,7 +115,7 @@ public class ServerSideProxyBase<T extends ToyORBService> {
 			return new MethodReturnMessage(isVoid, isVoid ? null : Message.DataValue.fromObject(returnValue));
 		} catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
 			e.printStackTrace();
-			return new MethodReturnMessage(e.getMessage());
+			return new MethodReturnMessage(e.getClass().getSimpleName() + " - " + e.getMessage());
 		}
 	};
 
